@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Owner - Complete Payment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .header {
+            background-color: #1e3a5f;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            background-color: white;
+            margin-top: -30px;
+            position: relative;
+        }
+        .order-summary {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        footer {
+            background-color: #1e3a5f;
+            color: white;
+            padding: 2rem 0;
+        }
+        .nav-link {
+            color: white;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #e94057;
+        }
+        .btn-payment {
+            background-color: #e94057;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-weight: bold;
+        }
+        .btn-payment:hover {
+            background-color: #d1354a;
+            color: white;
+        }
+    </style>
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand logo" href="#">TheRealOwner <br>Community</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <h1>Complete Your Payment</h1>
+            <p>You're just a few steps away from joining India's largest business community</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mb-5">
+        <div class="form-container">
+            <!-- Step Indicator -->
+            <div class="mb-4">
+                <div class="progress" style="height: 3px;">
+                    <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <span id="step1" class="badge rounded-pill bg-success">1. User Details</span>
+                    <span id="step2" class="badge rounded-pill bg-secondary">2. Payment</span>
+                </div>
+            </div>
+
+            <!-- User Details Form (Step 1) -->
+            <div id="userDetailsForm" class="active-form">
+                <h3 class="mb-4">Your Information</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="fullName" class="form-label">Full Name *</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="contactNumber" class="form-label">Contact Number *</label>
+                        <input type="tel" class="form-control" id="contactNumber" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="whatsappNumber" class="form-label">WhatsApp Number *</label>
+                        <input type="tel" class="form-control" id="whatsappNumber" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="state" class="form-label">State/Region *</label>
+                        <select class="form-select" id="state" required>
+                            <option value="" selected disabled>Select your region</option>
+                            <option value="Medak">Medak</option>
+                            <option value="Warangal">Warangal</option>
+                            <option value="Karimnagar">Karimnagar</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Nalgonda">Nalgonda</option>
+                            <option value="Khammam">Khammam</option>
+                            <option value="Adilabad">Adilabad</option>
+                            <option value="Mahabubnagar">Mahabubnagar</option>
+                            <option value="Nizamabad">Nizamabad</option>
+                            <option value="Rangareddy">Rangareddy</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">You are a *</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="userType" id="agent" value="agent" required>
+                                <label class="form-check-label" for="agent">Real Estate Agent</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="userType" id="individual" value="individual">
+                                <label class="form-check-label" for="individual">Individual</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Selected Plan Info (Read-only) -->
+                <div class="mt-4">
+                    <h5>Selected Plan</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h6 id="selectedPlanName">Loading plan...</h6>
+                                    <p class="text-muted mb-0" id="selectedPlanDuration"></p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <h6 id="selectedPlanPrice"></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2 mt-4">
+                    <button class="btn btn-payment" id="nextToOrderSummaryBtn">Continue to Payment</button>
+                </div>
+            </div>
+
+            <!-- Order Summary (Step 2) -->
+            <div id="orderSummaryForm" class="d-none">
+                <h3 class="mb-4">Order Summary</h3>
+                <div class="order-summary">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5 id="summaryPlanName"></h5>
+                            <p class="text-muted" id="summaryPlanDuration"></p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <h5 id="summaryPlanPrice"></h5>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p>GST (18%)</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <p>Included</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row fw-bold">
+                        <div class="col-md-8">
+                            <p>Total</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <p id="summaryTotalPrice"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-info-summary mt-4">
+                    <h5>Your Information</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <p class="mb-1 text-muted">Full Name</p>
+                                    <p class="fw-bold" id="summaryFullName">-</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1 text-muted">Email</p>
+                                    <p class="fw-bold" id="summaryEmail">-</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1 text-muted">Contact Number</p>
+                                    <p class="fw-bold" id="summaryContactNumber">-</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1 text-muted">WhatsApp Number</p>
+                                    <p class="fw-bold" id="summaryWhatsAppNumber">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2 mt-4">
+                    <button class="btn btn-secondary" id="backToUserDetailsBtn">Back</button>
+                    <button class="btn btn-payment flex-grow-1" id="payButton">Complete Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>The Real Owner Community</h5>
+                    <p>India's Largest Real Estate Network on WhatsApp</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Plans</a></li>
+                        <li><a href="#" class="text-white">Benefits</a></li>
+                        <li><a href="#" class="text-white">Features</a></li>
+                        <li><a href="terms-and-conditions.html" class="text-white">Terms & Conditions</a></li>
+                        <li><a href="privacy-policy.html" class="text-white">Privacy Policy</a></li>
+                        <li><a href="refund-policy.html" class="text-white">Refund & Cancellation Policy</a></li>
+                        <li><a href="contact-us.html" class="text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mailto:trowarangal@gmail.com" class="text-white"><i class="far fa-envelope me-2"></i>trowarangal@gmail.com</a></li>
+                        <li><a href="tel:+919493400167" class="text-white"><i class="fas fa-phone-alt me-2"></i>+91 9493400167</a></li>
+                        <li><a href="#" class="text-white"><i class="fas fa-map-marker-alt me-2"></i>View on Google Maps</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.2);">
+            <div class="text-center">
+                <p class="mb-0">Copyright © 2025 TheRealOwner. Developed by Scalebucks</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase Config & Functions -->
+    <script src="payment.js"></script>
+</body>
+</html>

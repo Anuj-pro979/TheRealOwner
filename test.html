@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Payment Integration</title>
+    <!-- Include Razorpay's checkout script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <!-- Payment information display -->
+    <div id="planInfo">
+        <h2>Selected Plan: <span id="planName"></span></h2>
+        <p>Duration: <span id="planDuration"></span></p>
+        <p>Price: ₹<span id="planPrice"></span></p>
+    </div>
+    
+    <!-- Payment button -->
+    <button id="payButton">Pay Now</button>
+
+    <script>
+        // Define the pricing configuration object
+        const pricingConfig = {
+            oneMonth: {
+                price: 499,
+                name: "One-Month Plan",
+                duration: "1 month"
+            },
+            quarterly: {
+                price: 999,
+                name: "Quarterly Plan",
+                duration: "3 months"
+            },
+            halfYearly: {
+                price: 1799,
+                name: "Half-Yearly Plan",
+                duration: "6 months"
+            },
+            yearly: {
+                price: 3499,
+                name: "Yearly Plan",
+                duration: "1 year"
+            },
+            twoYear: {
+                price: 6499,
+                name: "Two-Year Plan",
+                duration: "2 years"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get plan data from localStorage
+            const selectedPlanData = localStorage.getItem('selectedPlan');
+            let planData;
+            
+            if (selectedPlanData) {
+                try {
+                    planData = JSON.parse(selectedPlanData);
+                } catch (e) {
+                    console.error('Error parsing plan data:', e);
+                    // Default to quarterly plan if there's an error
+                    planData = {
+                        plan: "quarterly",
+                        price: pricingConfig.quarterly.price,
+                        name: pricingConfig.quarterly.name,
+                        duration: pricingConfig.quarterly.duration
+                    };
+                }
+            } else {
+                // Default to quarterly plan if no plan is selected
+                planData = {
+                    plan: "quarterly",
+                    price: pricingConfig.quarterly.price,
+                    name: pricingConfig.quarterly.name,
+                    duration: pricingConfig.quarterly.duration
+                };
+            }
+
+            // Update the plan information display
+            document.getElementById('planName').textContent = planData.name;
+            document.getElementById('planDuration').textContent = planData.duration;
+            document.getElementById('planPrice').textContent = planData.price;
+
+            // Options for Razorpay checkout with dynamic data
+            var options = {
+                "key": "rzp_test_OF1OfAnK0znrXC", // Replace with your Razorpay Key ID
+                "amount": planData.price * 100, // Amount in paise (converting rupees to paise)
+                "currency": "INR",
+                "name": "Your Company Name",
+                "description": planData.name + " - " + planData.duration,
+                "image": "https://yourcompany.com/logo.png", // Replace with your company logo URL
+                "handler": function (response) {
+                    // Handle the payment success response
+                    alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+                    // You can perform further actions here, such as sending the payment ID to your server for verification
+                    
+                    // You might want to save the transaction details
+                    const transactionData = {
+                        paymentId: response.razorpay_payment_id,
+                        planDetails: planData,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    console.log('Transaction completed:', transactionData);
+                    // Here you would typically send this data to your server
+                },
+                "prefill": {
+                    "name": "anuj",
+                    "email": "kotaanuj9@gmail.com",
+                    "contact": "7386497801"
+                },
+                "notes": {
+                    "address": "Customer Address",
+                    "planType": planData.plan
+                },
+                "theme": {
+                    "color": "#F37254"
+                }
+            };
+
+            // Attach event listener to the payment button
+            document.getElementById('payButton').onclick = function (e) {
+                var rzp = new Razorpay(options);
+                rzp.open();
+                e.preventDefault();
+            };
+        });
+    </script>
+</body>
+</html>
