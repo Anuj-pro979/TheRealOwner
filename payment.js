@@ -325,44 +325,44 @@ document.addEventListener('DOMContentLoaded', function() {
         const groupLinks = {
             // Telangana regions
             'Medak-oneMonth': 'https://chat.whatsapp.com/LC5SN5O0Tkk79zc3VaOPym',
-            'Medak-quarterly': 'https://chat.whatsapp.com/invite/Medak3M',
-            'Medak-halfYearly': 'https://chat.whatsapp.com/invite/Medak6M',
+            'Medak-quarterly': 'https://chat.whatsapp.com/E6hre228lSnC9RoYFyJs5V',
+            'Medak-halfYearly': 'https://chat.whatsapp.com/JcWfDDTdasm4MlCc3FBwem',
             
             'Warangal-oneMonth': 'https://chat.whatsapp.com/IYpc3NLJkyFBOFnBIVJcTw',
-            'Warangal-quarterly': 'https://chat.whatsapp.com/invite/Warangal3M',
-            'Warangal-halfYearly': 'https://chat.whatsapp.com/invite/Warangal6M',
+            'Warangal-quarterly': 'https://chat.whatsapp.com/GIZe99tlg09FdfiuLL85mW',
+            'Warangal-halfYearly': 'https://chat.whatsapp.com/Fmo02tMyX6eAuw3RvAICOs',
             
             'Karimnagar-oneMonth': 'https://chat.whatsapp.com/CTMVtjhiCojJqvyHNuaqtE',
-            'Karimnagar-quarterly': 'https://chat.whatsapp.com/invite/Karimnagar3M',
-            'Karimnagar-halfYearly': 'https://chat.whatsapp.com/invite/Karimnagar6M',
+            'Karimnagar-quarterly': 'https://chat.whatsapp.com/Gx5pYG9Lpb189FMwHNN8RQ',
+            'Karimnagar-halfYearly': 'https://chat.whatsapp.com/C2PrV833L2xE2fjhakMWyW',
             
             'Hyderabad-oneMonth': 'https://chat.whatsapp.com/HCMC9kVra8vC2Pe8kUqvkF',
-            'Hyderabad-quarterly': 'https://chat.whatsapp.com/invite/Hyderabad3M',
-            'Hyderabad-halfYearly': 'https://chat.whatsapp.com/invite/Hyderabad6M',
+            'Hyderabad-quarterly': 'https://chat.whatsapp.com/J77IvEVfLNIFphtvwOU1rb',
+            'Hyderabad-halfYearly': 'https://chat.whatsapp.com/FSZxMGcqZsE4SGKE0Q2VsQ',
             
             'Nalgonda-oneMonth': 'https://chat.whatsapp.com/CSypbja8NfMEKdGyknzUov',
-            'Nalgonda-quarterly': 'https://chat.whatsapp.com/invite/Nalgonda3M',
-            'Nalgonda-halfYearly': 'https://chat.whatsapp.com/invite/Nalgonda6M',
+            'Nalgonda-quarterly': 'https://chat.whatsapp.com/JGFgQf2mIBeKB3VhOR5Mm9',
+            'Nalgonda-halfYearly': 'https://chat.whatsapp.com/FBKVT771ho0EBZBOq1dqjT',
             
             'Khammam-oneMonth': 'https://chat.whatsapp.com/JdhjQtITatSKk1zPLOfOnd',
-            'Khammam-quarterly': 'https://chat.whatsapp.com/invite/Khammam3M',
-            'Khammam-halfYearly': 'https://chat.whatsapp.com/invite/Khammam6M',
+            'Khammam-quarterly': 'https://chat.whatsapp.com/Inzv3cdr5BG5u1usCFOQG5',
+            'Khammam-halfYearly': 'https://chat.whatsapp.com/GafSCodB4UcGH9ND07JtC7',
             
             'Adilabad-oneMonth': 'https://chat.whatsapp.com/K8nxVcKtl7mFWDJUjSwa5j',
-            'Adilabad-quarterly': 'https://chat.whatsapp.com/invite/Adilabad3M',
-            'Adilabad-halfYearly': 'https://chat.whatsapp.com/invite/Adilabad6M',
+            'Adilabad-quarterly': 'https://chat.whatsapp.com/HQl8c6DPXgpK0dFc7p0LRc',
+            'Adilabad-halfYearly': 'https://chat.whatsapp.com/JoNVvoUPZpYA9BKuEk8JXm',
             
             'Mahabubnagar-oneMonth': 'https://chat.whatsapp.com/Kv2131xyBZ89Z5EdA4HpBF',
-            'Mahabubnagar-quarterly': 'https://chat.whatsapp.com/invite/Mahabubnagar3M',
-            'Mahabubnagar-halfYearly': 'https://chat.whatsapp.com/invite/Mahabubnagar6M',
+            'Mahabubnagar-quarterly': 'https://chat.whatsapp.com/JGOE98emq5wF0868WBT8Im',
+            'Mahabubnagar-halfYearly': 'https://chat.whatsapp.com/EMF7KAQqyub78QtTCSIBrk',
             
             'Nizamabad-oneMonth': 'https://chat.whatsapp.com/CU96uhp1pVFJqcKUfKGmMX',
-            'Nizamabad-quarterly': 'https://chat.whatsapp.com/invite/Nizamabad3M',
-            'Nizamabad-halfYearly': 'https://chat.whatsapp.com/invite/Nizamabad6M',
+            'Nizamabad-quarterly': 'https://chat.whatsapp.com/BB1xK51KW8F2B9T4MhhS8G',
+            'Nizamabad-halfYearly': 'https://chat.whatsapp.com/ILybb6eAgqvJh1sbar17UZ',
             
             'Rangareddy-oneMonth': 'https://chat.whatsapp.com/Jh5wJcSztMJ9uj63Za29Im',
-            'Rangareddy-quarterly': 'https://chat.whatsapp.com/invite/Rangareddy3M',
-            'Rangareddy-halfYearly': 'https://chat.whatsapp.com/invite/Rangareddy6M',
+            'Rangareddy-quarterly': 'https://chat.whatsapp.com/BEr8uAGRMgbHLGbClma9uX',
+            'Rangareddy-halfYearly': 'https://chat.whatsapp.com/J6l6bPUcL02GNABE9QuAgY',
             
             // Default fallback group
             'default-default': 'https://chat.whatsapp.com/invite/RealOwnerCommunity'
